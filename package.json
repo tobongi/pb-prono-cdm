@@ -1,0 +1,11 @@
+{
+  "name": "pb-prono-cdm",
+  "private": true,
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:proxy": "pnpm --filter proxy dev",
+    "build:web": "pnpm --filter web build",
+    "test": "pnpm --filter proxy test"
+  },
+  "engines": { "node": ">=20", "pnpm": ">=9" }
+}
