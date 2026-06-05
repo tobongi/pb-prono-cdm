@@ -7,7 +7,7 @@ router.get('/', async (_req, res) => {
   try {
     const matches = await getMatches()
     res.json({ matches, stale: false })
-  } catch (err) {
+  } catch {
     res.status(502).json({ error: 'upstream_unavailable' })
   }
 })
