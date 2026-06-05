@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Inter:wght@400;500;600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,6 +13,8 @@
   50% { opacity: 0.4; }
 }
 
-.animate-live {
-  animation: pulse-live 1.5s ease-in-out infinite;
+@layer utilities {
+  .animate-live {
+    animation: pulse-live 1.5s ease-in-out infinite;
+  }
 }

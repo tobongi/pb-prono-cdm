@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './lib/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
@@ -19,8 +19,8 @@ const config: Config = {
         error: '#E05555',
       },
       fontFamily: {
-        display: ['Barlow Condensed', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['var(--font-display)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
       },
     },
   },
