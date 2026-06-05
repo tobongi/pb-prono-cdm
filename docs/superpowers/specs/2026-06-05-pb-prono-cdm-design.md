@@ -159,7 +159,9 @@ match_id          text NOT NULL    -- clé openfootball
 home_score_pred   int NOT NULL
 away_score_pred   int NOT NULL
 predicted_result  text            -- 'home' | 'draw' | 'away' (calculé)
-actual_result     text            -- rempli après le match
+actual_home_score int             -- score réel rempli après le match
+actual_away_score int             -- score réel rempli après le match
+actual_result     text            -- 'home' | 'draw' | 'away' rempli après le match
 points_earned     int             -- null tant que non validé
 locked_at         timestamptz     -- heure de verrouillage
 created_at        timestamptz DEFAULT now()
@@ -192,8 +194,8 @@ SELECT
     COALESCE(sp.points_earned, 0) AS total_points,
   COUNT(p.id) AS predictions_count,
   COUNT(CASE WHEN p.points_earned > 0 THEN 1 END) AS correct_count,
-  COUNT(CASE WHEN p.home_score_pred = actual_home
-              AND p.away_score_pred = actual_away THEN 1 END) AS exact_count,
+  COUNT(CASE WHEN p.home_score_pred = p.actual_home_score
+              AND p.away_score_pred = p.actual_away_score THEN 1 END) AS exact_count,
   RANK() OVER (ORDER BY total_points DESC) AS rank
 FROM users u
 LEFT JOIN predictions p ON p.user_id = u.id
@@ -225,6 +227,14 @@ GROUP BY u.id, u.pseudo, u.avatar_url, sp.points_earned
 |-----------|--------|
 | Vainqueur de la compétition | **20 pts** |
 | Finaliste perdant | **10 pts** |
+
+### Règle sur les prolongations (phase finale)
+
+En phase éliminatoire, si le match est nul après 90 min et part en prolongations/tirs au but :
+- Le **résultat validé est le score à 90 min** (pas après prolongations)
+- Ex : FRA 1-1 ARG après 90 min → "Nul" = bon résultat pour un prono 1-1
+- Le vainqueur effectif (après TAB) sert uniquement à remplir le bracket, pas au barème des pronostics
+- Cette règle est affichée dans l'écran "Comment jouer" pour éviter toute ambiguïté
 
 ### Règle de validation
 
