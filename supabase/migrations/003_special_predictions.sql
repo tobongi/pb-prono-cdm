@@ -14,3 +14,7 @@ ALTER TABLE public.special_predictions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "users can manage own special predictions"
   ON public.special_predictions FOR ALL
   USING (auth.uid()::text = user_id::text);
+
+CREATE POLICY "leaderboard can read all special points"
+  ON public.special_predictions FOR SELECT
+  USING (true);

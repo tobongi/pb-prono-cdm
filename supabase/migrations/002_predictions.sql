@@ -23,3 +23,6 @@ CREATE POLICY "users can manage own predictions"
 CREATE POLICY "leaderboard can read all points"
   ON public.predictions FOR SELECT
   USING (true);
+
+CREATE INDEX ON public.predictions(user_id);
+CREATE INDEX ON public.predictions(match_id);
