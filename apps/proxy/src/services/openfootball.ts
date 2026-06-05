@@ -26,30 +26,29 @@ export interface OFGroup {
   matches: OFMatch[]
 }
 
-async function fetchJSON<T>(url: string): Promise<T> {
-  const res = await fetch(url)
-  if (!res.ok) throw new Error(`openfootball fetch failed: ${res.status} ${url}`)
-  return res.json() as Promise<T>
+interface OFRaw {
+  rounds: Array<{ matches: OFMatch[] }>
+  groups: OFGroup[]
+}
+
+async function fetchRaw(): Promise<OFRaw> {
+  const cached = getCache<OFRaw>('of:raw')
+  if (cached && !cached.stale) return cached.data
+
+  const res = await fetch(`${BASE}/worldcup.json`)
+  if (!res.ok) throw new Error(`openfootball fetch failed: ${res.status}`)
+  const data = await res.json() as OFRaw
+  setCache('of:raw', data, TTL)
+  return data
 }
 
 export async function getMatches(): Promise<OFMatch[]> {
-  const cached = getCache<OFMatch[]>('of:matches')
-  if (cached && !cached.stale) return cached.data
-
-  const data = await fetchJSON<{ rounds: Array<{ matches: OFMatch[] }> }>(
-    `${BASE}/worldcup.json`
-  )
-  const matches = data.rounds.flatMap(r => r.matches)
-  setCache('of:matches', matches, TTL)
-  return matches
+  const data = await fetchRaw()
+  return data.rounds.flatMap(r => r.matches)
 }
 
 export async function getGroups(): Promise<OFGroup[]> {
-  const cached = getCache<OFGroup[]>('of:groups')
-  if (cached && !cached.stale) return cached.data
-
-  const data = await fetchJSON<{ groups: OFGroup[] }>(`${BASE}/worldcup.json`)
-  setCache('of:groups', data.groups, TTL)
+  const data = await fetchRaw()
   return data.groups
 }
 

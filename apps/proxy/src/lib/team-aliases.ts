@@ -1,7 +1,6 @@
 export const TEAM_ALIASES: Record<string, string> = {
   'usa': 'united states',
   'etats-unis': 'united states',
-  'états-unis': 'united states',
   'u.s.a.': 'united states',
   'coree du sud': 'south korea',
   'coree-du-sud': 'south korea',
@@ -11,9 +10,9 @@ export const TEAM_ALIASES: Record<string, string> = {
   "cote d'ivoire": 'ivory coast',
   "cote divoire": 'ivory coast',
   'czech republic': 'czechia',
-  'north macedonia': 'north macedonia',
+  'nouvelle zelande': 'new zealand',
+  'macedoine du nord': 'north macedonia',
   'trinidad & tobago': 'trinidad and tobago',
   'dr congo': 'democratic republic of congo',
   'uae': 'united arab emirates',
-  'new zealand': 'new zealand',
 }
