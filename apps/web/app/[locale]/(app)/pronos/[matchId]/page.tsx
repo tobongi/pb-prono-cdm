@@ -71,6 +71,11 @@ export default function MatchPredictionPage() {
   const isLocked = match?.status === 'live' || match?.status === 'finished'
   const canChange = !existing || changeCount < 2
 
+  // Sanitize match.time — strip timezone suffix like "UTC+3", "UTC-5", etc.
+  function getCleanTime(raw?: string): string {
+    return (raw ?? '21:00').replace(/\s*UTC[+-]\d+/gi, '').trim() || '21:00'
+  }
+
   function getPredictedResult(): 'home' | 'draw' | 'away' {
     if (homeScore > awayScore) return 'home'
     if (homeScore < awayScore) return 'away'
@@ -82,36 +87,47 @@ export default function MatchPredictionPage() {
     setSaving(true)
     setSubmitError('')
 
-    const { data: { session } } = await supabase.auth.getSession()
-    if (!session) { setSaving(false); router.push(`/${locale}/login`); return }
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) { router.push(`/${locale}/login`); return }
 
-    const { data: userRow } = await supabase
-      .from('users').select('id').eq('provider_id', session.user.id).single()
-    if (!userRow) { setSaving(false); setSubmitError('Erreur de connexion. Reconnecte-toi.'); return }
+      const { data: userRow } = await supabase
+        .from('users').select('id').eq('provider_id', session.user.id).single()
+      if (!userRow) { setSubmitError('Erreur de connexion. Reconnecte-toi.'); return }
 
-    const kickoffDate = new Date(`${match.date}T${match.time ?? '21:00'}:00Z`)
-    const newChangeCount = existing ? changeCount + 1 : 0
+      const cleanTime = getCleanTime(match.time)
+      const kickoffDate = new Date(`${match.date}T${cleanTime}:00Z`)
+      // Safety: if date is still invalid, use far-future fallback
+      const lockedAt = isNaN(kickoffDate.getTime())
+        ? new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+        : kickoffDate.toISOString()
 
-    const { error } = await supabase.from('predictions').upsert({
-      user_id: userRow.id,
-      match_id: matchId,
-      home_score_pred: homeScore,
-      away_score_pred: awayScore,
-      predicted_result: getPredictedResult(),
-      locked_at: kickoffDate.toISOString(),
-      change_count: newChangeCount,
-    }, { onConflict: 'user_id,match_id' })
+      const newChangeCount = existing ? changeCount + 1 : 0
 
-    if (error) {
-      console.error('Upsert error:', error)
-      setSubmitError('Erreur lors de l\'enregistrement. Réessaie.')
+      const { error } = await supabase.from('predictions').upsert({
+        user_id: userRow.id,
+        match_id: matchId,
+        home_score_pred: homeScore,
+        away_score_pred: awayScore,
+        predicted_result: getPredictedResult(),
+        locked_at: lockedAt,
+        change_count: newChangeCount,
+      }, { onConflict: 'user_id,match_id' })
+
+      if (error) {
+        console.error('Upsert error:', error)
+        setSubmitError('Erreur lors de l\'enregistrement. Réessaie.')
+        return
+      }
+
+      setChangeCount(newChangeCount)
+      setSaved(true)
+    } catch (err) {
+      console.error('handleSubmit unexpected error:', err)
+      setSubmitError('Erreur inattendue. Réessaie.')
+    } finally {
       setSaving(false)
-      return
     }
-
-    setChangeCount(newChangeCount)
-    setSaving(false)
-    setSaved(true)
   }
 
   // ─── LOADING ───────────────────────────────────────────────────────────────
@@ -123,7 +139,7 @@ export default function MatchPredictionPage() {
     )
   }
 
-  const kickoffStr = new Date(`${match.date}T${match.time ?? '21:00'}:00Z`)
+  const kickoffStr = new Date(`${match.date}T${getCleanTime(match.time)}:00Z`)
     .toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
 
   // ─── SUCCESS PAGE ──────────────────────────────────────────────────────────
