@@ -1,9 +1,16 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY apps/proxy/package.json apps/proxy/pnpm-lock.yaml* ./
-RUN npm install -g pnpm && pnpm install --frozen-lockfile
-COPY apps/proxy/ .
-RUN pnpm build
+
+# Copy proxy source (standalone package — no workspace deps)
+COPY apps/proxy/package.json ./package.json
+COPY apps/proxy/tsconfig.json ./tsconfig.json
+COPY apps/proxy/src ./src
+
+# Install deps (no lockfile needed — package.json is self-contained)
+RUN npm install --omit=dev=false
+
+# Build TypeScript
+RUN npx tsc
 
 FROM node:20-alpine
 WORKDIR /app
