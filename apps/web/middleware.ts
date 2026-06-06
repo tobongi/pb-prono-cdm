@@ -6,5 +6,5 @@ export default createMiddleware({
 })
 
 export const config = {
-  matcher: ['/((?!api|_next|icons|manifest.json|sw.js|workbox-.*|.*\\..*).*)'],
+  matcher: ['/((?!api|auth|_next|icons|manifest.json|sw.js|workbox-.*|.*\\..*).*)'],
 }
