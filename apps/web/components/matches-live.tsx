@@ -1,6 +1,6 @@
 'use client'
 import { useLiveMatches } from '@/hooks/use-live-matches'
-import { MatchCard } from './match-card'
+import { MatchCardWrapper } from './match-card-wrapper'
 import type { Match } from '@/lib/api'
 
 interface MatchesLiveProps {
@@ -42,7 +42,7 @@ export function MatchesLive({ initialMatches }: MatchesLiveProps) {
             </h2>
             <div className="space-y-2">
               {dayMatches.map(m => (
-                <MatchCard key={m.num} match={m} />
+                <MatchCardWrapper key={m.num} match={m} />
               ))}
             </div>
           </section>

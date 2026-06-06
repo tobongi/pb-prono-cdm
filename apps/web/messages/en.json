@@ -82,7 +82,8 @@
     "cta": "LET'S GO →"
   },
   "offline": {
-    "notice": "Data from"
+    "notice": "Data from",
+    "message": "You are offline. Data may be outdated."
   },
   "errors": {
     "matches_unavailable": "Schedule temporarily unavailable."

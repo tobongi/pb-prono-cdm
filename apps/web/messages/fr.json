@@ -82,7 +82,8 @@
     "cta": "C'EST PARTI →"
   },
   "offline": {
-    "notice": "Données du"
+    "notice": "Données du",
+    "message": "Vous êtes hors ligne. Les données peuvent être obsolètes."
   },
   "errors": {
     "matches_unavailable": "Calendrier temporairement indisponible."
