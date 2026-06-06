@@ -5,15 +5,21 @@ interface FlagProps {
   size?: 'sm' | 'md' | 'lg'
 }
 
-const sizes = { sm: 'w-6 h-6', md: 'w-10 h-10', lg: 'w-14 h-14' }
+const sizeClasses = {
+  sm: 'w-6 h-6 text-base',
+  md: 'w-10 h-10 text-2xl',
+  lg: 'w-14 h-14 text-4xl',
+}
 
 export function Flag({ code, size = 'md' }: FlagProps) {
-  const isoCode = getFlagCode(code)
+  const isoCode = getFlagCode(code) // from lib/fifa-codes.ts
+
   return (
-    <img
-      src={`https://flagcdn.com/w80/${isoCode}.png`}
-      alt={code}
-      className={`${sizes[size]} rounded-full object-cover border border-olive`}
+    <span
+      className={`fi fi-${isoCode} fis inline-block rounded-full border border-olive/40 bg-cover ${sizeClasses[size]}`}
+      role="img"
+      aria-label={code}
+      title={code}
     />
   )
 }

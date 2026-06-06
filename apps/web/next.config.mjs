@@ -9,14 +9,6 @@ const withPWA = require('next-pwa')({
   disable: process.env.NODE_ENV === 'development',
   runtimeCaching: [
     {
-      urlPattern: /^https:\/\/flagcdn\.com\/.*/i,
-      handler: 'CacheFirst',
-      options: {
-        cacheName: 'flags',
-        expiration: { maxEntries: 60, maxAgeSeconds: 30 * 24 * 60 * 60 },
-      },
-    },
-    {
       urlPattern: /\/api\/groups/,
       handler: 'StaleWhileRevalidate',
       options: {
@@ -37,15 +29,6 @@ const withPWA = require('next-pwa')({
 })
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'flagcdn.com',
-      },
-    ],
-  },
-}
+const nextConfig = {}
 
 export default withPWA(withNextIntl(nextConfig))

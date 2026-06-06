@@ -1,6 +1,6 @@
 'use client'
 
-import { getFlagCode } from '@/lib/fifa-codes'
+import { Flag } from './flag'
 
 interface TeamStanding {
   name: string
@@ -48,11 +48,7 @@ export function GroupStandings({ name, standings }: GroupStandingsProps) {
             >
               <td className="px-4 py-2">
                 <div className="flex items-center gap-2">
-                  <img
-                    src={`https://flagcdn.com/w40/${getFlagCode(t.code)}.png`}
-                    className="w-5 h-5 rounded-full object-cover"
-                    alt={t.code}
-                  />
+                  <Flag code={t.code} size="sm" />
                   {t.code}
                 </div>
               </td>
