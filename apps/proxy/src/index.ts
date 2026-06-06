@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import matchesRouter from './routes/matches'
 import groupsRouter from './routes/groups'
+import adminRouter from './routes/admin'
 
 const app = express()
 const PORT = process.env.PORT ?? 3001
@@ -19,6 +20,7 @@ app.use(limiter)
 
 app.use('/api/matches', matchesRouter)
 app.use('/api/groups', groupsRouter)
+app.use('/api/admin', adminRouter)
 
 app.get('/health', (_req, res) => res.json({ ok: true }))
 
