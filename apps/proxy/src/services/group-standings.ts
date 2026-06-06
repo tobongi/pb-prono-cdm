@@ -20,8 +20,8 @@ export interface GroupStanding {
   standings: TeamStanding[]
 }
 
-export async function getGroupStandings(): Promise<GroupStanding[]> {
-  const [groups, { matches: liveMatches }] = await Promise.all([
+export async function getGroupStandings(): Promise<{ standings: GroupStanding[]; stale: boolean }> {
+  const [groups, { matches: liveMatches, stale }] = await Promise.all([
     getGroups(),
     getLiveMatches(),
   ])
@@ -30,7 +30,7 @@ export async function getGroupStandings(): Promise<GroupStanding[]> {
     liveMatches.map(m => [matchKey(m.date, m.home, m.away), m])
   )
 
-  return groups.map(group => {
+  const groupStandings = groups.map(group => {
     const standings = new Map<string, TeamStanding>()
 
     for (const team of group.teams) {
@@ -70,4 +70,5 @@ export async function getGroupStandings(): Promise<GroupStanding[]> {
 
     return { name: group.name, standings: sorted }
   })
+  return { standings: groupStandings, stale }
 }
