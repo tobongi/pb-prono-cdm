@@ -106,7 +106,7 @@ export default function MatchPredictionPage() {
   }
 
   if (!match) {
-    return <div className="min-h-screen bg-bg-dark flex items-center justify-center">
+    return <div className="min-h-screen flex items-center justify-center">
       <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
     </div>
   }
@@ -124,7 +124,7 @@ export default function MatchPredictionPage() {
     })
 
   return (
-    <main className="min-h-screen bg-bg-dark px-4 py-6 pb-24 max-w-lg mx-auto">
+    <main className="min-h-screen px-4 py-6 pb-24 max-w-lg mx-auto">
       {saved && (
         <ConfirmationOverlay
           homeScore={homeScore}

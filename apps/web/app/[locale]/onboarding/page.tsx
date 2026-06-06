@@ -50,8 +50,9 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-bg-dark">
-      <div className="w-full max-w-sm flex flex-col gap-6">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 pb-pattern-bg relative">
+      <div className="absolute inset-0 bg-black/55" />
+      <div className="relative z-10 w-full max-w-sm flex flex-col gap-6">
         <h1 className="font-display text-3xl text-cream uppercase text-center">{t('title')}</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

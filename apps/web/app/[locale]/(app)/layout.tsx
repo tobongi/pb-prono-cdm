@@ -13,7 +13,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="min-h-screen bg-bg-dark">
+    <div className="min-h-screen pb-pattern-bg">
       {children}
       <BottomNav />
     </div>

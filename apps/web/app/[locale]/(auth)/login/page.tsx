@@ -16,20 +16,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center justify-center px-6 relative"
-      style={{
-        backgroundImage: 'url(/images/stadium-bg.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      <div className="absolute inset-0 bg-bg-dark/80" />
-
-      <div
-        className="absolute inset-0 opacity-[0.05]"
-        style={{ backgroundImage: 'url(/images/chicken-pattern.png)', backgroundSize: '200px' }}
-      />
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 relative pb-pattern-bg">
+      {/* Overlay sombre pour lisibilité */}
+      <div className="absolute inset-0 bg-black/55" />
 
       <div className="relative z-10 flex flex-col items-center gap-8 w-full max-w-sm">
         <img src="/icons/icon-192.png" alt="PB" className="w-16 h-16 rounded-full" />

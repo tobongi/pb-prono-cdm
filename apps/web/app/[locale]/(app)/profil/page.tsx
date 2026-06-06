@@ -33,6 +33,7 @@ export default async function ProfilPage() {
   ]
 
   return (
+    <div className="min-h-screen bg-bg-dark">
     <main className="px-4 py-6 pb-24 max-w-lg mx-auto">
       {/* Profile card */}
       {userRow ? (
@@ -77,5 +78,6 @@ export default async function ProfilPage() {
         ))}
       </div>
     </main>
+    </div>
   )
 }

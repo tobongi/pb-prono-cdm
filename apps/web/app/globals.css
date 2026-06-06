@@ -17,4 +17,10 @@
   .animate-live {
     animation: pulse-live 1.5s ease-in-out infinite;
   }
+
+  .pb-pattern-bg {
+    background-image: url('/pb-pattern.png');
+    background-repeat: repeat;
+    background-size: 600px 600px;
+  }
 }
