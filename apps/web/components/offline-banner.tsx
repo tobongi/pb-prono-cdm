@@ -1,8 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export function OfflineBanner() {
   const [isOffline, setIsOffline] = useState(false)
+  const t = useTranslations('offline')
 
   useEffect(() => {
     // Set initial state (only on client — navigator is undefined on server)
@@ -28,7 +30,7 @@ export function OfflineBanner() {
       aria-live="polite"
       className="fixed top-0 left-0 right-0 z-[100] bg-live text-white text-center py-2 px-4 text-sm font-body"
     >
-      Vous êtes hors ligne. Les données peuvent être obsolètes.
+      {t('message')}
     </div>
   )
 }

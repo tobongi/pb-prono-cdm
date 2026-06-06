@@ -35,6 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
             Une erreur est survenue. Rechargez la page.
           </p>
           <button
+            type="button"
             onClick={() => this.setState({ hasError: false })}
             className="px-4 py-2 bg-olive text-cream rounded-lg text-sm font-body hover:bg-olive/80 transition-colors"
           >
