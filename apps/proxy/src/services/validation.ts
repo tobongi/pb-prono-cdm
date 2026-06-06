@@ -63,7 +63,7 @@ export async function validateFinishedMatches(): Promise<ValidationResult[]> {
       const predScore: [number, number] = [pred.score_home, pred.score_away]
       const points = calculatePoints({ pred: predScore, actual, phase })
       const isExact = pred.score_home === actual[0] && pred.score_away === actual[1]
-      const resultCorrect = !isExact && points > 0
+      const resultCorrect = points > 0
 
       const { error: updateErr } = await supabase
         .from('predictions')
