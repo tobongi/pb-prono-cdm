@@ -3,11 +3,5 @@
   "buildCommand": "pnpm build",
   "installCommand": "pnpm install --frozen-lockfile",
   "outputDirectory": ".next",
-  "regions": ["cdg1"],
-  "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "PROXY_URL": "@proxy_url",
-    "SUPABASE_SERVICE_KEY": "@supabase_service_key"
-  }
+  "regions": ["cdg1"]
 }
