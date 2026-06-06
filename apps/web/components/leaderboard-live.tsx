@@ -17,7 +17,7 @@ export function LeaderboardLive({ initialEntries, currentUserId }: LeaderboardLi
       <div className="flex items-center gap-2 mb-4 px-4">
         <span
           className={`inline-block w-2 h-2 rounded-full ${
-            isLive ? 'bg-live animate-pulse' : 'bg-cream/30'
+            isLive ? 'bg-green-500 animate-pulse' : 'bg-cream/30'
           }`}
         />
         <span className="text-xs text-cream/50 font-body">

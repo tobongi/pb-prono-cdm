@@ -1,17 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { LeaderboardLive } from '@/components/leaderboard-live'
+import type { LeaderboardEntry } from '@/components/leaderboard-table'
 
 export const revalidate = 60
-
-interface LeaderboardEntry {
-  id: string
-  pseudo: string
-  avatar_url: string | null
-  total_points: number
-  rank: number
-  correct_count: number
-  exact_count: number
-}
 
 export default async function ClassementPage() {
   const supabase = await createClient()
