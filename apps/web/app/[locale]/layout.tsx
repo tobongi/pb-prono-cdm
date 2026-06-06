@@ -1,6 +1,8 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { LangSetter } from '@/components/lang-setter'
+import { QueryProvider } from '@/providers/query-provider'
+import { BottomNav } from '@/components/bottom-nav'
 
 export default async function LocaleLayout({
   children,
@@ -14,7 +16,10 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <LangSetter locale={locale} />
-      {children}
+      <QueryProvider>
+        {children}
+        <BottomNav />
+      </QueryProvider>
     </NextIntlClientProvider>
   )
 }

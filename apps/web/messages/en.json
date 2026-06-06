@@ -83,5 +83,9 @@
   },
   "offline": {
     "notice": "Data from"
-  }
+  },
+  "errors": {
+    "matches_unavailable": "Schedule temporarily unavailable."
+  },
+  "loading": "Loading…"
 }

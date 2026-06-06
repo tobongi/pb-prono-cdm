@@ -83,5 +83,9 @@
   },
   "offline": {
     "notice": "Données du"
-  }
+  },
+  "errors": {
+    "matches_unavailable": "Calendrier temporairement indisponible."
+  },
+  "loading": "Chargement…"
 }
