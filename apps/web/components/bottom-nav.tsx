@@ -21,7 +21,7 @@ export function BottomNav() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-bg-card border-t border-white/10 md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-bg-card border-t border-white/10">
       <div className="flex items-stretch h-16 max-w-lg mx-auto">
         {tabs.map(tab => {
           const active = isActive(tab.href)
