@@ -15,10 +15,22 @@ export interface Match {
   liveAwayScore?: number
 }
 
-export interface Group {
+export interface TeamStanding {
   name: string
-  teams: Array<{ name: string; code: string }>
-  matches: Match[]
+  code: string
+  played: number
+  won: number
+  drawn: number
+  lost: number
+  gf: number
+  ga: number
+  gd: number
+  pts: number
+}
+
+export interface GroupStanding {
+  name: string
+  standings: TeamStanding[]
 }
 
 export async function fetchMatches(): Promise<Match[]> {
@@ -28,7 +40,7 @@ export async function fetchMatches(): Promise<Match[]> {
   return data.matches
 }
 
-export async function fetchGroups(): Promise<Group[]> {
+export async function fetchGroups(): Promise<GroupStanding[]> {
   const res = await fetch(`${PROXY}/api/groups`, { next: { revalidate: 3600 } })
   if (!res.ok) throw new Error('Failed to fetch groups')
   const data = await res.json()

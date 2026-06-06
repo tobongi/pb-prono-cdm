@@ -4,8 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
 const tabs = [
-  { href: '/', icon: '📅', labelFr: 'Calendrier', labelEn: 'Schedule' },
-  { href: '/pronos', icon: '🎯', labelFr: 'Pronostics', labelEn: 'Predictions' },
+  { href: '/calendrier', icon: '📅', labelFr: 'Calendrier', labelEn: 'Schedule' },
   { href: '/groupes', icon: '📊', labelFr: 'Groupes', labelEn: 'Groups' },
   { href: '/classement', icon: '🏆', labelFr: 'Classement', labelEn: 'Ranking' },
 ]
@@ -15,11 +14,7 @@ export function BottomNav() {
   const locale = useLocale()
 
   function isActive(href: string) {
-    const full = `/${locale}${href === '/' ? '' : href}`
-    if (href === '/') {
-      // Only match exact locale root
-      return pathname === full || pathname === `/${locale}/`
-    }
+    const full = `/${locale}${href}`
     return pathname === full || pathname.startsWith(full + '/')
   }
 

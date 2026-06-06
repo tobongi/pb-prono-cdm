@@ -11,10 +11,14 @@ CREATE TABLE public.users (
 
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 
+CREATE POLICY "users can insert own profile"
+  ON public.users FOR INSERT
+  WITH CHECK (auth.uid()::text = provider_id);
+
 CREATE POLICY "users can read own profile"
   ON public.users FOR SELECT
-  USING (auth.uid()::text = id::text);
+  USING (auth.uid()::text = provider_id);
 
 CREATE POLICY "users can update own profile"
   ON public.users FOR UPDATE
-  USING (auth.uid()::text = id::text);
+  USING (auth.uid()::text = provider_id);
