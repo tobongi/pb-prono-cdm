@@ -21,14 +21,18 @@ export function mergeMatchData(ofMatches: OFMatch[], liveMatches: LiveMatch[]): 
     const keyByName = matchKey(m.date, m.team1.name, m.team2.name)
     const keyByCode = matchKey(m.date, m.team1.code, m.team2.code)
     const live = liveIndex.get(keyByName) ?? liveIndex.get(keyByCode)
+    if (!live && process.env.NODE_ENV !== 'test') {
+      console.warn(`[merger] no live data for OF#${m.num} ${m.team1.code} vs ${m.team2.code} on ${m.date}`)
+    }
 
     if (!live) return { ...m, status: 'upcoming' as const }
 
+    const hasScore = live.status !== 'upcoming'
     return {
       ...m,
       status: live.status,
-      liveHomeScore: live.homeScore,
-      liveAwayScore: live.awayScore,
+      liveHomeScore: hasScore ? live.homeScore : undefined,
+      liveAwayScore: hasScore ? live.awayScore : undefined,
       minute: live.minute,
       score: live.status === 'finished'
         ? { ft: [live.homeScore, live.awayScore] as [number, number] }
