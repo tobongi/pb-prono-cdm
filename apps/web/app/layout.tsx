@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning className={`${barlowCondensed.variable} ${inter.variable}`}>
+    <html suppressHydrationWarning className={`${barlowCondensed.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   )

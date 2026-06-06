@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
+import { LangSetter } from '@/components/lang-setter'
 
 export default async function LocaleLayout({
   children,
@@ -12,6 +13,7 @@ export default async function LocaleLayout({
   const messages = await getMessages()
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <LangSetter locale={locale} />
       {children}
     </NextIntlClientProvider>
   )
