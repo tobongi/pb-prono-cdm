@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Main circle — dark olive green -->
+  <circle cx="200" cy="200" r="178" fill="#3B4A1D"/>
+
+  <!-- PB — white bold inside the circle -->
+  <text
+    x="200" y="252"
+    text-anchor="middle"
+    font-family="'Arial Black', 'Helvetica Neue', Helvetica, sans-serif"
+    font-size="148"
+    font-weight="900"
+    fill="#FFFFFF"
+    letter-spacing="-4"
+  >PB</text>
+
+  <defs>
+    <!--
+      Full circle path r=193, starting at top (200,7), clockwise.
+      Uses two semicircular arcs to avoid degenerate single-point arc.
+      0%   = top      (200, 7)
+      25%  = right    (393, 200)
+      50%  = bottom   (200, 393)
+      75%  = left     (7, 200)
+    -->
+    <path id="circle-cw"
+      d="M 200 7
+         A 193 193 0 0 1 393 200
+         A 193 193 0 0 1 200 393
+         A 193 193 0 0 1 7 200
+         A 193 193 0 0 1 200 7"/>
+  </defs>
+
+  <!-- "PB TU SAIS" — upper-right arc, ~1 o'clock → ~4 o'clock (~8%–26%) -->
+  <text
+    font-family="'Arial Black', 'Helvetica Neue', Helvetica, sans-serif"
+    font-size="23"
+    font-weight="900"
+    letter-spacing="3"
+    fill="#1A1E0E"
+  >
+    <textPath href="#circle-cw" startOffset="7%">PB TU SAIS</textPath>
+  </text>
+
+  <!-- "QUAND T'AS GOÛTÉ" — lower-left arc, ~7 o'clock → ~11 o'clock (~50%–72%) -->
+  <text
+    font-family="'Arial Black', 'Helvetica Neue', Helvetica, sans-serif"
+    font-size="23"
+    font-weight="900"
+    letter-spacing="2.5"
+    fill="#1A1E0E"
+  >
+    <textPath href="#circle-cw" startOffset="49%">QUAND T&apos;AS GOÛTÉ</textPath>
+  </text>
+</svg>

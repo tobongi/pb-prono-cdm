@@ -21,7 +21,7 @@ export default function LoginPage() {
       <div className="absolute inset-0 bg-black/55" />
 
       <div className="relative z-10 flex flex-col items-center gap-8 w-full max-w-sm">
-        <img src="/icons/icon-192.png" alt="PB" className="w-16 h-16 rounded-full" />
+        <img src="/pb-logo.svg" alt="PB Poulet Braisé" className="w-24 h-24" />
 
         <div className="text-center">
           <p className="text-beige text-xs uppercase tracking-[0.3em] mb-2">{t('tagline')}</p>

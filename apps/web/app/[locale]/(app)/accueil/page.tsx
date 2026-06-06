@@ -47,7 +47,7 @@ export default async function AccueilPage() {
         {/* Header */}
         <div className="flex flex-col items-center gap-2 mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icons/icon-192.png" alt="PB" className="w-12 h-12 rounded-xl" />
+          <img src="/pb-logo.svg" alt="PB Poulet Braisé" className="w-20 h-20" />
           <p className="text-beige text-xs uppercase tracking-[0.25em]">PB POULET BRAISÉ TE RÉGALE</p>
           <h1 className="font-display text-3xl text-cream uppercase text-center leading-tight drop-shadow-lg">
             PRONOSTIQUE LA<br />COUPE DU MONDE<br />2026
