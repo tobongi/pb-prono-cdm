@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Home",
+    "pronos": "My Picks",
+    "classement": "Standings",
+    "calendrier": "Schedule",
+    "profil": "Profile"
+  },
+  "home": {
+    "title": "YOUR TURN",
+    "cta": "PLACE MY PICK →",
+    "my_rank": "My rank"
+  },
+  "match": {
+    "vs": "VS",
+    "live": "LIVE",
+    "upcoming": "UPCOMING",
+    "finished": "FINISHED",
+    "kickoff_in": "KICK-OFF IN",
+    "your_prono": "YOUR PREDICTION",
+    "choose_score": "Choose the exact score",
+    "validate": "CONFIRM MY PICK →",
+    "closes_at": "Closes at kick-off",
+    "locked": "LOCKED"
+  },
+  "prono": {
+    "saved": "PICK SAVED!",
+    "modifiable_until": "Editable until",
+    "next_prono": "NEXT PICK →",
+    "back": "BACK",
+    "none": "NO PICKS YET",
+    "none_desc": "You haven't picked any match yet."
+  },
+  "classement": {
+    "title": "STANDINGS",
+    "subtitle": "TOP PICKERS",
+    "you_are_here": "You are here"
+  },
+  "profil": {
+    "total_pts": "Total points",
+    "predictions": "Picks",
+    "correct": "Correct results",
+    "exact": "Exact scores",
+    "how_to_play": "How to play?",
+    "my_pronos": "My picks",
+    "special": "Special picks",
+    "logout": "Sign out"
+  },
+  "special": {
+    "title": "SPECIAL PICKS",
+    "winner_label": "WHO WILL WIN THE CUP?",
+    "runner_up_label": "WHO WILL BE RUNNER-UP?",
+    "locked_notice": "Locked on June 11, 2026 at 00:00 UTC",
+    "validate": "CONFIRM →"
+  },
+  "how_to_play": {
+    "title": "HOW TO PLAY?",
+    "prono_title": "PREDICT",
+    "prono_desc": "Enter your score before kick-off. Pick locks at match start.",
+    "scoring_title": "SCORING",
+    "group_result": "Correct result (groups)",
+    "group_exact": "Exact score (groups)",
+    "ko_result": "Correct result (KO)",
+    "ko_exact": "Exact score (KO)",
+    "special_title": "SPECIAL PICKS",
+    "winner_pts": "World Cup winner",
+    "runner_up_pts": "Runner-up",
+    "ranking_title": "STANDINGS",
+    "ranking_desc": "Updated after each match. Top 10 at the end = PB surprise 🍗",
+    "overtime_note": "Extra time: 90-min score counts for scoring, not the final result."
+  },
+  "auth": {
+    "tagline": "PB TREATS YOU",
+    "title": "PREDICT THE 2026 WORLD CUP",
+    "google": "Continue with Google",
+    "facebook": "Continue with Facebook",
+    "free_game": "Free game · No real stakes"
+  },
+  "onboarding": {
+    "title": "CHOOSE YOUR USERNAME",
+    "placeholder": "Ex: ThePickKing",
+    "cta": "LET'S GO →"
+  },
+  "offline": {
+    "notice": "Data from"
+  }
+}

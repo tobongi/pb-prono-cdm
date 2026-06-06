@@ -1,0 +1,87 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "pronos": "Mes pronos",
+    "classement": "Classement",
+    "calendrier": "Calendrier",
+    "profil": "Profil"
+  },
+  "home": {
+    "title": "À TOI DE JOUER",
+    "cta": "JE PRONOSTIQUE →",
+    "my_rank": "Ma position"
+  },
+  "match": {
+    "vs": "VS",
+    "live": "EN DIRECT",
+    "upcoming": "À VENIR",
+    "finished": "TERMINÉ",
+    "kickoff_in": "COUP D'ENVOI DANS",
+    "your_prono": "TON PRONOSTIC",
+    "choose_score": "Choisis le score exact",
+    "validate": "VALIDER MON PRONO →",
+    "closes_at": "Ferme au coup d'envoi",
+    "locked": "FERMÉ"
+  },
+  "prono": {
+    "saved": "PRONO ENREGISTRÉ !",
+    "modifiable_until": "Modifiable jusqu'à",
+    "next_prono": "PRONOSTIC SUIVANT →",
+    "back": "RETOUR",
+    "none": "AUCUN PRONOSTIC",
+    "none_desc": "Tu n'as pas encore pronostiqué de match."
+  },
+  "classement": {
+    "title": "CLASSEMENT",
+    "subtitle": "TOP PRONOSTIQUEURS",
+    "you_are_here": "Tu es ici"
+  },
+  "profil": {
+    "total_pts": "Points totaux",
+    "predictions": "Pronostics",
+    "correct": "Bons résultats",
+    "exact": "Scores exacts",
+    "how_to_play": "Comment jouer ?",
+    "my_pronos": "Mes pronostics",
+    "special": "Pronostics spéciaux",
+    "logout": "Se déconnecter"
+  },
+  "special": {
+    "title": "PRONOSTICS SPÉCIAUX",
+    "winner_label": "QUI VA GAGNER LA COUPE ?",
+    "runner_up_label": "QUI SERA FINALISTE ?",
+    "locked_notice": "Verrouillés le 11/06/2026 à 00:00 UTC",
+    "validate": "VALIDER →"
+  },
+  "how_to_play": {
+    "title": "COMMENT JOUER ?",
+    "prono_title": "PRONOSTIQUE",
+    "prono_desc": "Saisis ton score avant le coup d'envoi. Le prono se verrouille au début du match.",
+    "scoring_title": "LE BARÈME",
+    "group_result": "Bon résultat (groupes)",
+    "group_exact": "Score exact (groupes)",
+    "ko_result": "Bon résultat (KO)",
+    "ko_exact": "Score exact (KO)",
+    "special_title": "PRONOS SPÉCIAUX",
+    "winner_pts": "Vainqueur CDM",
+    "runner_up_pts": "Finaliste",
+    "ranking_title": "CLASSEMENT",
+    "ranking_desc": "Mis à jour après chaque match. Top 10 à la fin = surprise PB 🍗",
+    "overtime_note": "En cas de prolongations, le score à 90 min fait foi pour le barème."
+  },
+  "auth": {
+    "tagline": "PB TE RÉGALE",
+    "title": "PRONOSTIQUE LA COUPE DU MONDE 2026",
+    "google": "Continuer avec Google",
+    "facebook": "Continuer avec Facebook",
+    "free_game": "Jeu gratuit · Sans enjeu réel"
+  },
+  "onboarding": {
+    "title": "CHOISIS TON PSEUDO",
+    "placeholder": "Ex: LePronoKing",
+    "cta": "C'EST PARTI →"
+  },
+  "offline": {
+    "notice": "Données du"
+  }
+}
