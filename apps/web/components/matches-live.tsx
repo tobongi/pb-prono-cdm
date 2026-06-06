@@ -8,9 +8,9 @@ interface MatchesLiveProps {
 }
 
 export function MatchesLive({ initialMatches }: MatchesLiveProps) {
-  const { data, isError } = useLiveMatches()
+  const { data, isError } = useLiveMatches(initialMatches)
 
-  const matches: Match[] = data ?? initialMatches
+  const matches: Match[] = data ?? []
 
   if (matches.length === 0) {
     return (

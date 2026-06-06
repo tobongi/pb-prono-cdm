@@ -8,12 +8,14 @@ async function fetchMatchesClient(): Promise<Match[]> {
   return (await res.json()).matches
 }
 
-export function useLiveMatches() {
+export function useLiveMatches(initialMatches?: Match[]) {
   return useQuery({
     queryKey: ['matches'],
     queryFn: fetchMatchesClient,
     staleTime: 30_000,
     refetchInterval: 30_000,
     refetchIntervalInBackground: false,
+    initialData: initialMatches,
+    initialDataUpdatedAt: initialMatches ? Date.now() : undefined,
   })
 }

@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
@@ -15,7 +16,11 @@ export function BottomNav() {
 
   function isActive(href: string) {
     const full = `/${locale}${href === '/' ? '' : href}`
-    return pathname === full || pathname.startsWith(`/${locale}${href}/`)
+    if (href === '/') {
+      // Only match exact locale root
+      return pathname === full || pathname === `/${locale}/`
+    }
+    return pathname === full || pathname.startsWith(full + '/')
   }
 
   return (
@@ -26,7 +31,7 @@ export function BottomNav() {
           const label = locale === 'fr' ? tab.labelFr : tab.labelEn
           const href = `/${locale}${tab.href === '/' ? '' : tab.href}`
           return (
-            <a
+            <Link
               key={tab.href}
               href={href}
               className={`flex flex-col items-center justify-center flex-1 gap-1 text-xs font-body transition-colors ${
@@ -37,7 +42,7 @@ export function BottomNav() {
             >
               <span className="text-xl leading-none">{tab.icon}</span>
               <span className="leading-none">{label}</span>
-            </a>
+            </Link>
           )
         })}
       </div>
