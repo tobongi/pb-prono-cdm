@@ -19,6 +19,7 @@
   }
 
   .pb-pattern-bg {
+    background-color: #3A4820;
     background-image: url('/pb-pattern.png');
     background-repeat: repeat;
     background-size: 600px 600px;

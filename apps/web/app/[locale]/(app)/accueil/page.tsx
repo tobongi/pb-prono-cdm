@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getLocale } from 'next-intl/server'
+import { VideoBackground } from '@/components/video-background'
 
 export default async function AccueilPage() {
   const locale = await getLocale()
@@ -25,15 +26,7 @@ export default async function AccueilPage() {
   return (
     <main className="relative min-h-screen flex flex-col px-4 pt-8 pb-24 overflow-hidden">
       {/* Video background — mobile & tablet only (hidden on lg+) */}
-      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover lg:hidden"
-        src="/pb-prono-video.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+      <VideoBackground />
 
       {/* Dark overlay over video for readability */}
       <div className="absolute inset-0 bg-black/65 lg:hidden" />

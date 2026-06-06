@@ -13,7 +13,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   }
 
   return (
-    <div className="min-h-screen pb-pattern-bg">
+    <div
+      className="min-h-screen pb-pattern-bg"
+      style={{ backgroundImage: "url('/pb-pattern.png')", backgroundRepeat: 'repeat', backgroundSize: '600px 600px' }}
+    >
       {children}
       <BottomNav />
     </div>
