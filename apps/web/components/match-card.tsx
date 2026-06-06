@@ -51,11 +51,24 @@ export function MatchCard({ match, userPrediction, onPress }: MatchCardProps) {
         </div>
       </div>
 
-      {userPrediction && (
-        <div className="border-t border-olive pt-2 text-center text-sm text-beige">
-          Ton prono : {userPrediction.home} – {userPrediction.away}
+      {match.status === 'upcoming' || !match.status ? (
+        <div className="border-t border-olive/40 pt-3 flex items-center justify-between">
+          <span className="text-muted text-xs">
+            {new Date(match.date + 'T12:00:00Z').toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })}
+          </span>
+          <span className="text-gold text-xs font-display uppercase tracking-wide">
+            PRONOSTIQUER →
+          </span>
         </div>
-      )}
+      ) : match.status === 'live' ? (
+        <div className="border-t border-olive/40 pt-3 text-center">
+          <span className="text-live text-xs font-display uppercase animate-pulse">EN COURS</span>
+        </div>
+      ) : userPrediction ? (
+        <div className="border-t border-olive/40 pt-3 text-center text-sm text-beige">
+          Ton prono : <span className="text-cream font-display">{userPrediction.home} – {userPrediction.away}</span>
+        </div>
+      ) : null}
     </div>
   )
 }

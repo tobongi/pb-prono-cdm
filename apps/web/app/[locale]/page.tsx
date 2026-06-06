@@ -6,5 +6,5 @@ interface Props {
 
 export default async function LocaleRoot({ params }: Props) {
   const { locale } = await params
-  redirect(`/${locale}/calendrier`)
+  redirect(`/${locale}/accueil`)
 }

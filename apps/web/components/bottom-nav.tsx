@@ -4,9 +4,10 @@ import { usePathname } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
 const tabs = [
-  { href: '/calendrier', icon: '📅', labelFr: 'Calendrier', labelEn: 'Schedule' },
-  { href: '/groupes', icon: '📊', labelFr: 'Groupes', labelEn: 'Groups' },
+  { href: '/accueil', icon: '🏠', labelFr: 'Accueil', labelEn: 'Home' },
+  { href: '/calendrier', icon: '📅', labelFr: 'Matchs', labelEn: 'Matches' },
   { href: '/classement', icon: '🏆', labelFr: 'Classement', labelEn: 'Ranking' },
+  { href: '/groupes', icon: '📊', labelFr: 'Groupes', labelEn: 'Groups' },
 ]
 
 export function BottomNav() {

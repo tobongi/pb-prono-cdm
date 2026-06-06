@@ -11,7 +11,10 @@ export default async function CalendrierPage() {
 
   return (
     <main className="px-4 py-6 pb-24 max-w-lg mx-auto">
-      <h1 className="font-display text-3xl text-cream mb-6 uppercase">Calendrier</h1>
+      <div className="text-center mb-6">
+        <p className="text-beige text-xs uppercase tracking-widest mb-1">À TOI DE JOUER</p>
+        <h1 className="font-display text-4xl text-cream uppercase">Matchs</h1>
+      </div>
       <MatchesLive initialMatches={matches} />
     </main>
   )
