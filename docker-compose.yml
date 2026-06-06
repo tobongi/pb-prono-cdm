@@ -7,6 +7,12 @@ services:
       - mongo_data:/data/db
     networks:
       - internal
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   worldcup:
     image: node:20-alpine
@@ -19,9 +25,18 @@ services:
       - ./apps/worldcup-api:/app
     ports:
       - "3002:3002"
-    depends_on: [mongodb]
+    depends_on:
+      mongodb:
+        condition: service_healthy
     networks:
       - internal
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3002/health", "||", "exit", "1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
 
   proxy:
     build: ./apps/proxy
@@ -30,9 +45,12 @@ services:
     environment:
       - WORLDCUP_API_URL=http://worldcup:3002
       - WEB_URL=${WEB_URL:-http://localhost:3000}
-    depends_on: [worldcup]
+    depends_on:
+      worldcup:
+        condition: service_healthy
     networks:
       - internal
+    restart: on-failure
 
 volumes:
   mongo_data:
