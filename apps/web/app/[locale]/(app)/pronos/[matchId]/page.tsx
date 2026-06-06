@@ -19,6 +19,7 @@ export default function MatchPredictionPage() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [existing, setExisting] = useState<{ home: number; away: number } | null>(null)
+  const [changeCount, setChangeCount] = useState(0)
   const [countdown, setCountdown] = useState('')
 
   const supabase = createClient()
@@ -37,7 +38,7 @@ export default function MatchPredictionPage() {
 
       const { data: pred } = await supabase
         .from('predictions')
-        .select('home_score_pred, away_score_pred')
+        .select('home_score_pred, away_score_pred, change_count')
         .eq('user_id', userRow.id)
         .eq('match_id', matchId)
         .single()
@@ -46,6 +47,7 @@ export default function MatchPredictionPage() {
         setHomeScore(pred.home_score_pred)
         setAwayScore(pred.away_score_pred)
         setExisting({ home: pred.home_score_pred, away: pred.away_score_pred })
+        setChangeCount(pred.change_count ?? 0)
       }
     })
   }, [matchId])
@@ -77,6 +79,8 @@ export default function MatchPredictionPage() {
 
   async function handleSubmit() {
     if (isLocked || !match) return
+    if (existing && changeCount >= 2) return  // max 2 changes
+
     setSaving(true)
 
     const { data: { session } } = await supabase.auth.getSession()
@@ -91,16 +95,25 @@ export default function MatchPredictionPage() {
     if (!userRow) { setSaving(false); return }
 
     const kickoffDate = new Date(`${match.date}T${match.time ?? '21:00'}:00Z`)
+    const newChangeCount = existing ? changeCount + 1 : 0
 
-    await supabase.from('predictions').upsert({
+    const { error } = await supabase.from('predictions').upsert({
       user_id: userRow.id,
       match_id: matchId,
       home_score_pred: homeScore,
       away_score_pred: awayScore,
       predicted_result: getPredictedResult(),
       locked_at: kickoffDate.toISOString(),
+      change_count: newChangeCount,
     }, { onConflict: 'user_id,match_id' })
 
+    if (error) {
+      console.error('Prediction upsert error:', error)
+      setSaving(false)
+      return
+    }
+
+    setChangeCount(newChangeCount)
     setSaving(false)
     setSaved(true)
   }
@@ -208,10 +221,20 @@ export default function MatchPredictionPage() {
 
         {!isLocked && (
           <>
+            {existing && changeCount > 0 && changeCount < 2 && (
+              <p className="text-center text-gold text-xs">
+                Il te reste {2 - changeCount} modification{2 - changeCount > 1 ? 's' : ''} avant le coup d&apos;envoi
+              </p>
+            )}
+            {existing && changeCount >= 2 && (
+              <p className="text-center text-muted text-xs">
+                Limite de 2 modifications atteinte
+              </p>
+            )}
             <button
               onClick={handleSubmit}
-              disabled={saving}
-              className="bg-gold text-bg-dark font-display text-xl uppercase py-4 rounded-xl hover:brightness-110 transition disabled:opacity-50"
+              disabled={saving || (existing !== null && changeCount >= 2)}
+              className="bg-gold text-bg-dark font-display text-xl uppercase py-4 rounded-xl hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? '...' : existing ? 'MODIFIER MON PRONO →' : t('validate')}
             </button>
