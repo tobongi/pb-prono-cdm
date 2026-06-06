@@ -3,7 +3,6 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { LangSetter } from '@/components/lang-setter'
 import { QueryProvider } from '@/providers/query-provider'
-import { BottomNav } from '@/components/bottom-nav'
 import { OfflineBanner } from '@/components/offline-banner'
 import { ErrorBoundary } from '@/components/error-boundary'
 
@@ -23,7 +22,6 @@ export default async function LocaleLayout({
         <OfflineBanner />
         <ErrorBoundary>
           {children}
-          <BottomNav />
         </ErrorBoundary>
       </QueryProvider>
     </NextIntlClientProvider>

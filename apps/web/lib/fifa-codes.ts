@@ -20,7 +20,7 @@ export const FIFA_TO_ISO2: Record<string, string> = {
   COD: 'cd', COG: 'cg', GAB: 'ga', GNB: 'gw', GUI: 'gn', LBR: 'lr',
   SLE: 'sl', BUR: 'bf', BEN: 'bj', TOG: 'tg', CPV: 'cv',
   // Asia / Middle East / Oceania
-  JPN: 'jp', KOR: 'kr', CHN: 'cn', AUS: 'au', IRN: 'ir', SAU: 'sa',
+  JPN: 'jp', KOR: 'kr', CHN: 'cn', AUS: 'au', IRN: 'ir', SAU: 'sa', KSA: 'sa', // KSA = alternate FIFA code for Saudi Arabia
   UAE: 'ae', QAT: 'qa', IRQ: 'iq', SYR: 'sy', JOR: 'jo', LEB: 'lb',
   KUW: 'kw', OMA: 'om', BHR: 'bh', ISR: 'il', IND: 'in', PAK: 'pk',
   BAN: 'bd', NZL: 'nz', PHI: 'ph', IDN: 'id', THA: 'th', VIE: 'vn',

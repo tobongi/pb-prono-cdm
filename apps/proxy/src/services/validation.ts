@@ -38,11 +38,12 @@ export async function validateFinishedMatches(): Promise<ValidationResult[]> {
     const phase = isKnockoutMatch(match.round) ? 'knockout' : 'group'
 
     // Fetch predictions for this match that haven't been validated yet
+    // NOTE: match_id is text in schema, home_score_pred/away_score_pred are the correct column names
     const { data: preds, error: fetchErr } = await supabase
       .from('predictions')
-      .select('id, score_home, score_away')
-      .eq('match_num', match.num)
-      .is('points', null)
+      .select('id, home_score_pred, away_score_pred')
+      .eq('match_id', String(match.num))
+      .is('points_earned', null)
 
     if (fetchErr) {
       console.error(`[validation] fetch error match ${match.num}:`, fetchErr)
@@ -60,18 +61,13 @@ export async function validateFinishedMatches(): Promise<ValidationResult[]> {
     let errors = 0
 
     for (const pred of preds) {
-      const predScore: [number, number] = [pred.score_home, pred.score_away]
+      const predScore: [number, number] = [pred.home_score_pred, pred.away_score_pred]
       const points = calculatePoints({ pred: predScore, actual, phase })
-      const isExact = pred.score_home === actual[0] && pred.score_away === actual[1]
-      const resultCorrect = points > 0
 
       const { error: updateErr } = await supabase
         .from('predictions')
         .update({
-          points,
-          is_exact: isExact,
-          result_correct: resultCorrect,
-          validated_at: new Date().toISOString(),
+          points_earned: points,
         })
         .eq('id', pred.id)
 
