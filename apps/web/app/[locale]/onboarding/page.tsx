@@ -19,9 +19,18 @@ export default function OnboardingPage() {
 
     const supabase = createClient()
     const { data: { session } } = await supabase.auth.getSession()
-    if (!session) return router.push('/fr/login')
+    if (!session) {
+      setLoading(false)
+      return router.push('/fr/login')
+    }
 
-    const provider = session.user.app_metadata.provider as 'google' | 'facebook'
+    const rawProvider = session.user.app_metadata.provider
+    if (rawProvider !== 'google' && rawProvider !== 'facebook') {
+      setError('Fournisseur OAuth non supporté.')
+      setLoading(false)
+      return
+    }
+    const provider = rawProvider as 'google' | 'facebook'
 
     const { error: insertError } = await supabase.from('users').insert({
       provider,
