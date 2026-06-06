@@ -1,6 +1,6 @@
 'use client'
 
-interface LeaderboardEntry {
+export interface LeaderboardEntry {
   id: string
   pseudo: string
   avatar_url: string | null

@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { LeaderboardTable } from '@/components/leaderboard-table'
+import { LeaderboardLive } from '@/components/leaderboard-live'
 
 export const revalidate = 60
 
@@ -51,7 +51,7 @@ export default async function ClassementPage() {
           <p className="text-muted text-sm mt-2">Sois le premier à pronostiquer !</p>
         </div>
       ) : (
-        <LeaderboardTable entries={entries} currentUserId={currentUserId} />
+        <LeaderboardLive initialEntries={entries} currentUserId={currentUserId} />
       )}
     </main>
   )
