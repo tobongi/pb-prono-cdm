@@ -1,4 +1,4 @@
-const PROXY = process.env.NEXT_PUBLIC_PROXY_URL ?? 'http://localhost:3001'
+const PROXY = process.env.PROXY_URL ?? 'http://localhost:3001'
 
 export interface Match {
   num: number

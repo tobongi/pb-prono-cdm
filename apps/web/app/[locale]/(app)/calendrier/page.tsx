@@ -20,10 +20,10 @@ export default async function CalendrierPage() {
       {Object.keys(byDate).length === 0 ? (
         <p className="text-muted text-center py-12">Calendrier non disponible pour l&apos;instant.</p>
       ) : (
-        Object.entries(byDate).map(([date, dayMatches]) => (
+        Object.entries(byDate).sort(([a], [b]) => a.localeCompare(b)).map(([date, dayMatches]) => (
           <section key={date} className="mb-6">
             <h2 className="text-beige text-sm uppercase tracking-widest mb-3">
-              {new Date(date).toLocaleDateString('fr-FR', {
+              {new Date(date + 'T12:00:00Z').toLocaleDateString('fr-FR', {
                 weekday: 'long', day: 'numeric', month: 'long'
               })}
             </h2>

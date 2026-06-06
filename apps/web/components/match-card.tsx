@@ -1,3 +1,5 @@
+'use client'
+
 import { Flag } from './flag'
 import type { Match } from '@/lib/api'
 
