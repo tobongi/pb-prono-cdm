@@ -19,6 +19,7 @@ export default function MatchPredictionPage() {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const [existing, setExisting] = useState<{ home: number; away: number } | null>(null)
+  const [countdown, setCountdown] = useState('')
 
   const supabase = createClient()
 
@@ -48,6 +49,23 @@ export default function MatchPredictionPage() {
       }
     })
   }, [matchId])
+
+  useEffect(() => {
+    if (!match || match.status !== 'upcoming') return
+    function update() {
+      const kickoff = new Date(`${match!.date}T${(match!.time ?? '21:00').replace(' UTC-6','').replace(' UTC-4','').replace(' UTC-5','')}:00Z`)
+      const diff = kickoff.getTime() - Date.now()
+      if (diff <= 0) { setCountdown(''); return }
+      const j = Math.floor(diff / 86400000)
+      const h = Math.floor((diff % 86400000) / 3600000)
+      const m = Math.floor((diff % 3600000) / 60000)
+      const s = Math.floor((diff % 60000) / 1000)
+      setCountdown(`${j}j ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`)
+    }
+    update()
+    const id = setInterval(update, 1000)
+    return () => clearInterval(id)
+  }, [match])
 
   const isLocked = match?.status === 'live' || match?.status === 'finished'
 
@@ -149,6 +167,25 @@ export default function MatchPredictionPage() {
             <span className="text-xs text-beige">{match.team2.name}</span>
           </div>
         </div>
+
+        {/* Countdown */}
+        {!isLocked && countdown && (
+          <div className="border-t border-olive pt-4 text-center">
+            <p className="text-beige text-[10px] uppercase tracking-widest mb-3">COUP D&apos;ENVOI DANS</p>
+            <div className="flex justify-center gap-4">
+              {countdown.split(' ').map((part, i) => {
+                const val = part.replace(/[jhmns]/g,'')
+                const unit = ['JOURS','HRS','MIN','SEC'][i] ?? ''
+                return (
+                  <div key={i} className="flex flex-col items-center">
+                    <span className="font-display text-3xl text-cream">{val}</span>
+                    <span className="text-muted text-[9px] uppercase tracking-wide">{unit}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="border-t border-olive pt-4">
           <p className="text-center text-beige text-xs uppercase tracking-widest mb-4">

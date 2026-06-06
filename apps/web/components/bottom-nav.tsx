@@ -4,10 +4,11 @@ import { usePathname } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
 const tabs = [
-  { href: '/accueil', icon: '🏠', labelFr: 'Accueil', labelEn: 'Home' },
-  { href: '/calendrier', icon: '📅', labelFr: 'Matchs', labelEn: 'Matches' },
-  { href: '/classement', icon: '🏆', labelFr: 'Classement', labelEn: 'Ranking' },
-  { href: '/groupes', icon: '📊', labelFr: 'Groupes', labelEn: 'Groups' },
+  { href: '/accueil', icon: '🏠', label: 'Accueil' },
+  { href: '/calendrier', icon: '🎯', label: 'Pronos' },
+  { href: '/classement', icon: '🏆', label: 'Classement' },
+  { href: '/mes-pronos', icon: '📋', label: 'Mes pronos' },
+  { href: '/profil', icon: '👤', label: 'Profil' },
 ]
 
 export function BottomNav() {
@@ -20,24 +21,21 @@ export function BottomNav() {
   }
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-bg-card border-t border-olive/30 md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-bg-card border-t border-white/10 md:hidden">
       <div className="flex items-stretch h-16 max-w-lg mx-auto">
         {tabs.map(tab => {
           const active = isActive(tab.href)
-          const label = locale === 'fr' ? tab.labelFr : tab.labelEn
-          const href = `/${locale}${tab.href === '/' ? '' : tab.href}`
+          const href = `/${locale}${tab.href}`
           return (
             <Link
               key={tab.href}
               href={href}
-              className={`flex flex-col items-center justify-center flex-1 gap-1 text-xs font-body transition-colors ${
-                active
-                  ? 'text-gold border-t-2 border-gold -mt-px'
-                  : 'text-cream/50 hover:text-cream'
+              className={`flex flex-col items-center justify-center flex-1 gap-0.5 text-[10px] font-body transition-colors ${
+                active ? 'text-gold' : 'text-cream/40 hover:text-cream/70'
               }`}
             >
-              <span className="text-xl leading-none">{tab.icon}</span>
-              <span className="leading-none">{label}</span>
+              <span className={`text-xl leading-none ${active ? 'filter drop-shadow-[0_0_6px_rgba(212,168,83,0.8)]' : ''}`}>{tab.icon}</span>
+              <span className="leading-none">{tab.label}</span>
             </Link>
           )
         })}
