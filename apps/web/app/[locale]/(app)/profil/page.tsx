@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { LogoutButton } from '@/components/logout-button'
 import Link from 'next/link'
 
 export default async function ProfilPage() {
@@ -78,6 +79,11 @@ export default async function ProfilPage() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Logout */}
+      <div className="mt-8">
+        <LogoutButton />
       </div>
     </main>
     </div>
