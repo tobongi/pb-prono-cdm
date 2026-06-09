@@ -27,7 +27,9 @@ export default function DataDeletionPage() {
         {/* Intro */}
         <div className="bg-bg-card rounded-xl p-4 mb-4">
           <p className="font-body text-beige text-sm leading-relaxed">
-            Conformément au RGPD et aux exigences de Meta/Facebook, vous pouvez demander la suppression complète de vos données personnelles de <span className="text-cream font-medium">PB Prono CDM</span>.
+            Conformément au RGPD et aux exigences de Meta/Facebook, vous pouvez demander la suppression
+            complète de vos données personnelles de <span className="text-cream font-medium">PB Prono CDM</span>,
+            service opéré par <span className="text-cream font-medium">POULET BRAISÉ</span> (SAS · SIREN 508 485 851 · 45 Av. Paul Signac, 93100 Montreuil).
           </p>
         </div>
 
@@ -118,7 +120,8 @@ export default function DataDeletionPage() {
 
         {/* Footer note */}
         <p className="font-body text-muted text-xs text-center leading-relaxed">
-          Cette page est requise par Meta (Facebook/Instagram) conformément à leur politique de données.
+          Cette page est requise par Meta (Facebook/Instagram) conformément à leur politique de données.<br />
+          © 2026 POULET BRAISÉ — SAS · SIREN 508 485 851 · 45 Av. Paul Signac, 93100 Montreuil
         </p>
 
       </div>

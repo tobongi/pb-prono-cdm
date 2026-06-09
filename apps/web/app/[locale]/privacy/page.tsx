@@ -45,7 +45,9 @@ export default function PrivacyPage() {
             </h2>
             <p className="text-beige text-sm leading-relaxed font-body">
               <strong className="text-cream">PB Prono CDM</strong> est un jeu de pronostics autour de la Coupe du Monde 2026,
-              opéré par <strong className="text-cream">PB Poulet Braisé</strong>.
+              opéré par <strong className="text-cream">POULET BRAISÉ</strong> — SAS au capital de 50 000 €,
+              SIREN 508 485 851, dont le siège social est situé au{' '}
+              <strong className="text-cream">45 Avenue Paul Signac, 93100 Montreuil</strong>.
               Pour toute question relative à vos données personnelles, contactez-nous à{' '}
               <a
                 href="mailto:pb-prono@pouletbraise.com"
@@ -213,7 +215,7 @@ export default function PrivacyPage() {
 
         {/* Footer note */}
         <p className="text-muted text-xs font-body text-center mt-10">
-          © 2026 PB Poulet Braisé — PB Prono CDM
+          © 2026 POULET BRAISÉ — SAS · SIREN 508 485 851 · 45 Av. Paul Signac, 93100 Montreuil
         </p>
 
       </div>
