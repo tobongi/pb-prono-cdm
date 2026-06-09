@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+
+// Force dynamic — reads cookies and env vars at runtime
+export const dynamic = 'force-dynamic'
 import { createHmac } from 'crypto'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
