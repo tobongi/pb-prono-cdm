@@ -7,7 +7,8 @@ Application web de pronostics Coupe du Monde 2026, branded **PB Poulet Braisé**
 
 | Service | URL | Plateforme |
 |---------|-----|-----------|
-| Site live | https://pb-prono-cdm.vercel.app | Vercel |
+| Site live (prod) | https://pbprono.online | Vercel (domaine custom) |
+| Site live (fallback) | https://pb-prono-cdm.vercel.app | Vercel |
 | Repo GitHub | https://github.com/tobongi/pb-prono-cdm | GitHub |
 | Supabase | app.supabase.com (projet pb-prono-cdm) | Supabase |
 
@@ -199,8 +200,20 @@ Règle KO : score à 90 min fait foi (pas prolongations).
 |----------|-------|
 | `NEXT_PUBLIC_SUPABASE_URL` | URL projet Supabase |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clé anon Supabase (public) |
-| `SUPABASE_SERVICE_KEY` | Clé service Supabase (server only) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Clé service Supabase (server only — TikTok bridge) |
 | `PROXY_URL` | URL du proxy Express (si déployé) |
+| `TIKTOK_CLIENT_KEY` | Client key TikTok Developer App (`aw2sx99slh2fnpy5`) |
+| `TIKTOK_CLIENT_SECRET` | Client secret TikTok Developer App |
+| `TIKTOK_BRIDGE_SECRET` | Secret HMAC pour dériver le mot de passe bridge Supabase |
+| `NEXT_PUBLIC_APP_URL` | URL publique de l'app (`https://pbprono.online`) |
+
+## Domaine custom
+
+- **Domaine** : `pbprono.online` (acheté juin 2026)
+- **Configuré sur** : Vercel (Settings → Domains)
+- **TikTok redirect URI** : `https://pbprono.online/auth/tiktok/callback`
+- **Facebook Privacy Policy** : `https://pbprono.online/fr/privacy`
+- **Facebook Data Deletion** : `https://pbprono.online/fr/data-deletion`
 
 ## Notes techniques importantes
 
