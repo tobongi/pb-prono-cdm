@@ -4,22 +4,23 @@ import Link from 'next/link'
 
 export default async function ProfilPage() {
   const supabase = await createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+  // getUser() instead of getSession() — hits Supabase server to verify/refresh token
+  const { data: { user } } = await supabase.auth.getUser()
 
   let userRow: { pseudo: string; avatar_url: string | null; created_at: string } | null = null
   let totalPoints = 0
 
-  if (session) {
+  if (user) {
     // Fetch user record by provider_id — MUST include 'id' for the predictions query
     const { data } = await supabase
       .from('users')
       .select('id, pseudo, avatar_url, created_at')
-      .eq('provider_id', session.user.id)
+      .eq('provider_id', user.id)
       .single()
     userRow = data
 
     if (data) {
-      // Use data.id (custom UUID from public.users) not session.user.id (OAuth provider UUID)
+      // Use data.id (custom UUID from public.users) not user.id (OAuth provider UUID)
       const { data: preds } = await supabase
         .from('predictions')
         .select('points_earned')
