@@ -54,6 +54,17 @@ export default function LoginPage() {
         </div>
 
         <p className="text-muted text-xs">{t('free_game')}</p>
+
+        {/* Legal links */}
+        <div className="flex items-center gap-3 text-[10px] text-muted/60">
+          <a href="/fr/privacy" className="hover:text-beige transition-colors underline underline-offset-2">
+            Politique de confidentialité
+          </a>
+          <span>·</span>
+          <a href="/fr/data-deletion" className="hover:text-beige transition-colors underline underline-offset-2">
+            Suppression des données
+          </a>
+        </div>
       </div>
     </div>
   )
