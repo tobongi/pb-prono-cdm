@@ -1,18 +1,25 @@
 'use client'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
   const t = useTranslations('auth')
   const supabase = createClient()
+  const [authError, setAuthError] = useState<string | null>(null)
 
   async function signInWith(provider: 'google' | 'facebook') {
-    await supabase.auth.signInWithOAuth({
+    setAuthError(null)
+    const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     })
+    if (error) {
+      console.error('[OAuth error]', error)
+      setAuthError(error.message)
+    }
   }
 
   return (
@@ -67,6 +74,10 @@ export default function LoginPage() {
             {t('tiktok')}
           </a>
         </div>
+
+        {authError && (
+          <p className="text-red-400 text-xs text-center bg-red-400/10 px-4 py-2 rounded-lg">{authError}</p>
+        )}
 
         <p className="text-muted text-xs">{t('free_game')}</p>
 
