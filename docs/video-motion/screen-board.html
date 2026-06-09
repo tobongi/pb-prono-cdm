@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PB Prono CDM - Ecrans video</title>
+  <style>
+    :root {
+      --bg: #06060e;
+      --card: #1a1a1a;
+      --olive: #3A4820;
+      --gold: #D4A853;
+      --cream: #F5F0E8;
+      --beige: #C8B89A;
+      --muted: rgba(245, 240, 232, .45);
+      --live: #EF4444;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #0b0b10;
+      color: var(--cream);
+      font-family: Inter, Arial, sans-serif;
+      padding: 40px;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      color: var(--gold);
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 32px;
+      align-items: start;
+    }
+
+    .shot {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .label {
+      color: var(--beige);
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .phone {
+      width: 360px;
+      height: 640px;
+      border-radius: 34px;
+      overflow: hidden;
+      background: var(--bg);
+      border: 10px solid #171717;
+      box-shadow: 0 22px 70px rgba(0,0,0,.45);
+      position: relative;
+    }
+
+    .screen {
+      height: 100%;
+      padding: 28px 18px 78px;
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at 30% 15%, rgba(212,168,83,.14), transparent 26%), radial-gradient(circle at 80% 70%, rgba(58,72,32,.36), transparent 30%);
+      position: relative;
+    }
+
+    .center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .logo {
+      width: 92px;
+      height: 92px;
+      border-radius: 24px;
+      background: var(--olive);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 42px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .eyebrow {
+      color: var(--beige);
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 38px;
+      line-height: .9;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .subtitle {
+      color: var(--beige);
+      font-size: 14px;
+      line-height: 1.35;
+      margin: 12px 0 0;
+    }
+
+    .card {
+      background: rgba(26,26,26,.92);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .button {
+      background: var(--gold);
+      color: var(--bg);
+      border-radius: 14px;
+      padding: 15px 18px;
+      text-align: center;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: .05em;
+      font-weight: 900;
+    }
+
+    .outline-button {
+      border: 1px solid rgba(212,168,83,.45);
+      color: var(--cream);
+      border-radius: 14px;
+      padding: 13px 18px;
+      text-align: center;
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+
+    .nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 62px;
+      background: var(--card);
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: center;
+      text-align: center;
+      color: rgba(245,240,232,.45);
+      font-size: 9px;
+    }
+
+    .nav b { color: var(--gold); display: block; font-size: 18px; margin-bottom: 2px; }
+    .nav span { display: block; font-size: 18px; margin-bottom: 2px; }
+
+    .team { width: 40%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .flag {
+      width: 54px;
+      height: 38px;
+      border-radius: 8px;
+      background: linear-gradient(90deg,#244aa5 0 33%,#fff 33% 66%,#d72828 66%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.2);
+    }
+    .flag.ma { background: #c1272d; }
+    .flag.br { background: linear-gradient(135deg,#009b3a 0 100%); position: relative; }
+    .flag.br:after { content:""; position:absolute; inset:9px 14px; background:#ffdf00; transform:rotate(45deg); }
+    .code { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 20px; }
+    .name { color: var(--beige); font-size: 11px; }
+    .vs, .score-big { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 34px; color: var(--cream); }
+    .score-big { color: var(--gold); font-size: 54px; }
+
+    .score-control {
+      width: 82px;
+      height: 106px;
+      border-radius: 18px;
+      background: #101018;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 54px;
+    }
+
+    .points {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .points .card {
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .pts {
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 54px;
+      color: var(--gold);
+      line-height: .9;
+    }
+
+    .leader {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+    .leader.gold { background: rgba(212,168,83,.17); border: 1px solid var(--gold); }
+    .rank { width: 34px; text-align: center; color: var(--beige); font-family: "Barlow Condensed", Impact, sans-serif; font-size: 20px; }
+    .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--olive); }
+    .player { flex: 1; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 18px; }
+    .leader.gold .player, .leader.gold .score { color: var(--gold); }
+    .score { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 20px; }
+
+    .prize {
+      min-height: 210px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #b56b2d, #d4a853 48%, #3a4820);
+      display: flex;
+      align-items: end;
+      padding: 18px;
+      color: var(--bg);
+      font-family: "Barlow Condensed", Impact, sans-serif;
+      font-size: 36px;
+      line-height: .9;
+      text-transform: uppercase;
+      box-shadow: 0 24px 60px rgba(212,168,83,.2);
+    }
+
+    .menu-visual {
+      min-height: 210px;
+      border-radius: 24px;
+      background: radial-gradient(circle at 50% 40%, #f2c36f, #3a4820 58%, #151512);
+      display: grid;
+      place-items: center;
+      font-size: 76px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ecrans video PB Prono CDM</h1>
+  <div class="board">
+    <section class="shot">
+      <div class="label">01 - Hook</div>
+      <div class="phone"><div class="screen center">
+        <div style="height:70px"></div>
+        <div class="logo">PB</div>
+        <div class="eyebrow">PB Poulet Braise</div>
+        <h2 class="title">Pronostique<br>la Coupe du Monde<br>2026</h2>
+        <p class="subtitle">Joue gratuitement. Monte au classement. Tente de gagner.</p>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">02 - Connexion</div>
+      <div class="phone"><div class="screen stack">
+        <div class="center">
+          <div class="logo">PB</div>
+          <h2 class="title">Entre dans<br>le jeu</h2>
+          <p class="subtitle">Connecte-toi et choisis ton pseudo.</p>
+        </div>
+        <div class="card stack" style="margin-top:20px">
+          <div class="button">Continuer avec Google</div>
+          <div class="outline-button">Continuer avec Facebook</div>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">03 - Calendrier</div>
+      <div class="phone"><div class="screen stack">
+        <div class="center">
+          <div class="eyebrow">A toi de jouer</div>
+          <h2 class="title">Choisis<br>un match</h2>
+        </div>
+        <div class="card">
+          <div class="row" style="color:var(--beige);font-size:11px;text-transform:uppercase"><span>Groupe A</span><span>21:00</span></div>
+          <div class="row" style="margin-top:18px">
+            <div class="team"><div class="flag"></div><div class="code">FRA</div><div class="name">France</div></div>
+            <div class="vs">VS</div>
+            <div class="team"><div class="flag ma"></div><div class="code">MAR</div><div class="name">Maroc</div></div>
+          </div>
+          <div class="row" style="border-top:1px solid rgba(255,255,255,.08);margin-top:16px;padding-top:12px">
+            <span style="color:var(--muted);font-size:12px">Sam. 13 juin</span>
+            <span style="color:var(--gold);font-family:Impact;text-transform:uppercase;font-size:13px">Pronostiquer -></span>
+          </div>
+        </div>
+        <div class="nav"><div><b>⌂</b>Accueil</div><div><b>◎</b>Pronos</div><div><span>🏆</span>Classement</div><div><span>☰</span>Mes pronos</div><div><span>●</span>Profil</div></div>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">04 - Pronostic</div>
+      <div class="phone"><div class="screen stack">
+        <div class="card">
+          <div class="row">
+            <div class="team"><div class="flag"></div><div class="code">FRA</div></div>
+            <div class="vs">VS</div>
+            <div class="team"><div class="flag ma"></div><div class="code">MAR</div></div>
+          </div>
+          <div style="border-top:1px solid rgba(255,255,255,.08);margin:18px 0;padding-top:18px;text-align:center">
+            <div class="eyebrow">Ton pronostic</div>
+            <div class="row" style="justify-content:center;gap:26px">
+              <div class="score-control">2</div>
+              <div class="vs">-</div>
+              <div class="score-control">1</div>
+            </div>
+            <p class="subtitle">Resultat prevu : France gagne</p>
+          </div>
+          <div class="button">Valider mon prono</div>
+        </div>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">05 - Points</div>
+      <div class="phone"><div class="screen stack center">
+        <div class="eyebrow">Gagne des points</div>
+        <h2 class="title">Plus tu es precis,<br>plus tu montes</h2>
+        <div class="points" style="margin-top:28px;width:100%">
+          <div class="card"><div class="pts">+7</div><div class="eyebrow">Score exact</div></div>
+          <div class="card"><div class="pts">+3</div><div class="eyebrow">Bon resultat</div></div>
+        </div>
+        <p class="subtitle">Les points s'ajoutent apres les matchs.</p>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">06 - Classement</div>
+      <div class="phone"><div class="screen">
+        <div class="center">
+          <div class="eyebrow">Top pronostiqueurs</div>
+          <h2 class="title">Classement</h2>
+        </div>
+        <div style="margin-top:24px">
+          <div class="leader gold"><div class="rank">1.</div><div class="avatar"></div><div class="player">NASSIM</div><div class="score">42 pts</div></div>
+          <div class="leader"><div class="rank">2.</div><div class="avatar"></div><div class="player">SOFIANE</div><div class="score">38 pts</div></div>
+          <div class="leader"><div class="rank">3.</div><div class="avatar"></div><div class="player">AMEL</div><div class="score">35 pts</div></div>
+          <div class="leader"><div class="rank">4.</div><div class="avatar"></div><div class="player">TOI</div><div class="score">33 pts</div></div>
+        </div>
+        <div class="nav"><div><span>⌂</span>Accueil</div><div><span>◎</span>Pronos</div><div><b>🏆</b>Classement</div><div><span>☰</span>Mes pronos</div><div><span>●</span>Profil</div></div>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">07 - Premier prix</div>
+      <div class="phone"><div class="screen stack">
+        <div class="center">
+          <div class="eyebrow">1er prix</div>
+          <h2 class="title">Le joueur avec<br>le plus de points</h2>
+        </div>
+        <div class="prize">Gagne un<br>week-end<br>au Maroc</div>
+        <p class="subtitle center">Termine premier du classement et remporte le gros lot.</p>
+      </div></div>
+    </section>
+
+    <section class="shot">
+      <div class="label">08 - Lots PB</div>
+      <div class="phone"><div class="screen stack center">
+        <div class="eyebrow">Les meilleurs gagnent aussi</div>
+        <h2 class="title">Un menu PB</h2>
+        <div class="menu-visual">🍗</div>
+        <h2 class="title" style="font-size:32px">Plat au choix<br>+ boisson</h2>
+        <div class="button" style="width:100%">Jouer gratuitement</div>
+      </div></div>
+    </section>
+  </div>
+</body>
+</html>

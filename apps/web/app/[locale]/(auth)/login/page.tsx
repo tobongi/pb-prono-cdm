@@ -51,6 +51,17 @@ export default function LoginPage() {
             </svg>
             {t('facebook')}
           </button>
+
+          {/* TikTok — custom OAuth flow via /auth/tiktok */}
+          <a
+            href="/auth/tiktok"
+            className="flex items-center justify-center gap-3 bg-[#010101] text-white font-display text-lg uppercase px-6 py-4 rounded-xl hover:bg-[#1a1a1a] border border-white/10 transition-colors"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.19 8.19 0 004.79 1.54V6.83a4.85 4.85 0 01-1.02-.14z"/>
+            </svg>
+            {t('tiktok')}
+          </a>
         </div>
 
         <p className="text-muted text-xs">{t('free_game')}</p>

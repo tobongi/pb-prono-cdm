@@ -1,4 +1,5 @@
 'use client'
+
 import { useEffect } from 'react'
 import Link from 'next/link'
 
@@ -15,14 +16,18 @@ export default function AppError({
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-8 text-center bg-bg-dark">
-      <span className="text-4xl">⚠️</span>
-      <p className="text-cream/70 font-body text-sm">
-        Une erreur est survenue. Rechargez la page.
+      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gold/20 text-2xl font-display text-gold" aria-hidden="true">
+        !
+      </span>
+      <p className="text-cream/80 font-body text-sm max-w-xs">
+        Une erreur est survenue. Recharge la page ou reviens à l'accueil.
       </p>
-      <p className="text-red-400/70 font-body text-xs max-w-xs break-words">
-        {error.message}
-        {error.digest && <span className="block mt-1 text-muted">#{error.digest}</span>}
-      </p>
+      {process.env.NODE_ENV !== 'production' && (
+        <p className="text-red-400/70 font-body text-xs max-w-xs break-words">
+          {error.message}
+          {error.digest && <span className="block mt-1 text-muted">#{error.digest}</span>}
+        </p>
+      )}
       <div className="flex gap-3">
         <button
           type="button"

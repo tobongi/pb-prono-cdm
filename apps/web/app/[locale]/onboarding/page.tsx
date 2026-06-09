@@ -24,19 +24,25 @@ export default function OnboardingPage() {
       return router.push('/fr/login')
     }
 
-    const rawProvider = session.user.app_metadata.provider
-    if (rawProvider !== 'google' && rawProvider !== 'facebook') {
+    const appProvider = session.user.app_metadata.provider
+    const metaProvider = session.user.user_metadata?.provider as string | undefined
+
+    // Determine provider: Google/Facebook via app_metadata, TikTok via user_metadata
+    let provider: 'google' | 'facebook' | 'tiktok'
+    if (appProvider === 'google') provider = 'google'
+    else if (appProvider === 'facebook') provider = 'facebook'
+    else if (metaProvider === 'tiktok') provider = 'tiktok'
+    else {
       setError('Fournisseur OAuth non supporté.')
       setLoading(false)
       return
     }
-    const provider = rawProvider as 'google' | 'facebook'
 
     const { error: insertError } = await supabase.from('users').insert({
       provider,
-      provider_id: session.user.id,
+      provider_id: session.user.id, // Supabase Auth UUID — consistent across all providers
       pseudo: pseudo.trim(),
-      avatar_url: session.user.user_metadata.avatar_url,
+      avatar_url: session.user.user_metadata?.avatar_url ?? null,
       device_fp: getDeviceFingerprint(),
     })
 

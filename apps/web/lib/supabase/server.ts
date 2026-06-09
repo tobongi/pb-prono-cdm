@@ -9,9 +9,15 @@ export async function createClient() {
     {
       cookies: {
         getAll: () => cookieStore.getAll(),
-        setAll: (cs) => cs.forEach(({ name, value, options }) =>
-          cookieStore.set(name, value, options)
-        ),
+        setAll: (cs) =>
+          cs.forEach(({ name, value, options }) => {
+            try {
+              cookieStore.set(name, value, options)
+            } catch {
+              // Server Components cannot always write refreshed auth cookies.
+              // Middleware/route handlers can still persist them on the next request.
+            }
+          }),
       },
     }
   )
