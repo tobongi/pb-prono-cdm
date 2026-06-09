@@ -5,10 +5,10 @@ import { BottomNav } from '@/components/bottom-nav'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
-  const { data: { session } } = await supabase.auth.getSession()
+  const { data: { user } } = await supabase.auth.getUser()
   const locale = await getLocale()
 
-  if (!session) {
+  if (!user) {
     redirect(`/${locale}/login`)
   }
 
